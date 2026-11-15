@@ -206,5 +206,26 @@ Consumer и инструкция упрощены для учебной рабо
 
 Формат событий описан в [документации Debezium](https://debezium.io/documentation/reference/stable/connectors/postgresql.html).
 
-Проверены синтаксис Python, JSON/YAML и обработка примерных событий consumer.
-Полный запуск Docker-стенда в среде подготовки не выполнялся: Docker недоступен.
+## Автоматическая проверка запуска
+
+[GitHub Actions](https://github.com/SVFr13nD/kafka-practicum-4/actions/workflows/verify.yml)
+поднимает настоящий Docker-стенд при обновлении main. Проверка ждет RUNNING
+у коннектора и задач, выполняет test-data.sql, читает оба топика и проверяет
+SNAPSHOT / INSERT / UPDATE / DELETE / tombstone. Затем проверяет ненулевые
+метрики Prometheus и снимает реальный скриншот Grafana.
+
+После успешного запуска результаты автоматически сохраняются в `evidence/`.
+До появления успешного запуска наличие workflow само по себе не доказывает
+работоспособность. При ошибке логи доступны в артефакте `cdc-evidence-<run_id>`.
+
+Локально тот же сбор результатов можно запустить после `docker compose up -d --build`:
+
+```bash
+python -m pip install -r requirements.txt playwright
+python -m playwright install --with-deps chromium
+python scripts/verify.py
+```
+
+Проверка выполняет тестовый SQL и добавляет учебные строки. Запускайте ее
+на отдельном учебном стенде; существующие данные автоматически не удаляются.
+

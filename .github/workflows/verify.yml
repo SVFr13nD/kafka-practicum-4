@@ -1,0 +1,50 @@
+name: Run CDC lab and collect evidence
+on:
+  push:
+    branches: [main]
+    paths-ignore: ['evidence/**']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: cdc-verification
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install verification tools
+        run: |
+          python -m pip install -r requirements.txt playwright
+          python -m playwright install --with-deps chromium
+      - name: Start the actual lab
+        run: docker compose up -d --build
+      - name: Check CDC and capture Grafana
+        run: python scripts/verify.py
+      - name: Collect diagnostic logs
+        if: always()
+        run: |
+          mkdir -p evidence
+          docker compose ps -a > evidence/containers.txt
+          docker compose logs --no-color > evidence/docker.log 2>&1
+      - name: Upload run evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cdc-evidence-${{ github.run_id }}
+          path: evidence/
+      - name: Save successful evidence to repository
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add evidence/README.md evidence/connector-status.json evidence/consumer-output.txt evidence/test-data-output.txt evidence/prometheus-queries.json evidence/grafana.png evidence/containers.txt
+          git commit -m 'docs: record successful CDC run [skip ci]' || exit 0
+          git push
+      - name: Stop lab
+        if: always()
+        run: docker compose down -v
