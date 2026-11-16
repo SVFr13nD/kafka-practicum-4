@@ -107,7 +107,7 @@ with sync_playwright() as pw:
     page.locator('input[name="user"]').fill('admin')
     page.locator('input[name="password"]').fill('admin')
     page.get_by_role('button', name='Log in', exact=True).click()
-    page.wait_for_url(lambda url: '/login' not in url, timeout=30000)
+    page.wait_for_url(lambda url: urllib.parse.urlparse(url).path != '/login', timeout=30000)
     if page.get_by_text('Skip', exact=True).is_visible():
         page.get_by_text('Skip', exact=True).click()
     page.goto('http://localhost:3000/d/kafka-connect-debezium?from=now-15m&to=now&kiosk')
