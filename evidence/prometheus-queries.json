@@ -1,0 +1,67 @@
+{
+  "kafka_connect_connector_status{connector=\"postgres-connector\",status=\"running\"}": {
+    "status": "success",
+    "data": {
+      "resultType": "vector",
+      "result": [
+        {
+          "metric": {
+            "__name__": "kafka_connect_connector_status",
+            "connector": "postgres-connector",
+            "instance": "kafka-connect:9404",
+            "job": "kafka-connect",
+            "status": "running"
+          },
+          "value": [
+            1794807527.488,
+            "1"
+          ]
+        }
+      ]
+    }
+  },
+  "kafka_connect_task_status{connector=\"postgres-connector\",status=\"running\"}": {
+    "status": "success",
+    "data": {
+      "resultType": "vector",
+      "result": [
+        {
+          "metric": {
+            "__name__": "kafka_connect_task_status",
+            "connector": "postgres-connector",
+            "instance": "kafka-connect:9404",
+            "job": "kafka-connect",
+            "status": "running",
+            "task": "0"
+          },
+          "value": [
+            1794807527.488,
+            "1"
+          ]
+        }
+      ]
+    }
+  },
+  "debezium_metrics_totalnumberofeventsseen{context=\"streaming\"}": {
+    "status": "success",
+    "data": {
+      "resultType": "vector",
+      "result": [
+        {
+          "metric": {
+            "__name__": "debezium_metrics_totalnumberofeventsseen",
+            "context": "streaming",
+            "instance": "kafka-connect:9404",
+            "job": "kafka-connect",
+            "plugin": "postgres",
+            "server": "postgres"
+          },
+          "value": [
+            1794807527.489,
+            "8"
+          ]
+        }
+      ]
+    }
+  }
+}

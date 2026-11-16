@@ -1,0 +1,90 @@
+Жду изменения из PostgreSQL. Для выхода нажмите Ctrl+C.
+
+Топик: postgres.public.users
+Операция: SNAPSHOT
+Было: null
+Стало: {"id": 1, "name": "John Doe", "email": "john@example.com", "created_at": 1794807487497435}
+
+Топик: postgres.public.users
+Операция: SNAPSHOT
+Было: null
+Стало: {"id": 2, "name": "Jane Smith", "email": "jane@example.com", "created_at": 1794807487497435}
+
+Топик: postgres.public.users
+Операция: SNAPSHOT
+Было: null
+Стало: {"id": 3, "name": "Alice Johnson", "email": "alice@example.com", "created_at": 1794807487497435}
+
+Топик: postgres.public.users
+Операция: SNAPSHOT
+Было: null
+Стало: {"id": 4, "name": "Bob Brown", "email": "bob@example.com", "created_at": 1794807487497435}
+
+Топик: postgres.public.orders
+Операция: SNAPSHOT
+Было: null
+Стало: {"id": 1, "user_id": 1, "product_name": "Product A", "quantity": 2, "order_date": 1794807487498043}
+
+Топик: postgres.public.orders
+Операция: SNAPSHOT
+Было: null
+Стало: {"id": 2, "user_id": 1, "product_name": "Product B", "quantity": 1, "order_date": 1794807487498043}
+
+Топик: postgres.public.orders
+Операция: SNAPSHOT
+Было: null
+Стало: {"id": 3, "user_id": 2, "product_name": "Product C", "quantity": 5, "order_date": 1794807487498043}
+
+Топик: postgres.public.orders
+Операция: SNAPSHOT
+Было: null
+Стало: {"id": 4, "user_id": 3, "product_name": "Product D", "quantity": 3, "order_date": 1794807487498043}
+
+Топик: postgres.public.orders
+Операция: SNAPSHOT
+Было: null
+Стало: {"id": 5, "user_id": 4, "product_name": "Product E", "quantity": 4, "order_date": 1794807487498043}
+
+Топик: postgres.public.users
+Операция: INSERT
+Было: null
+Стало: {"id": 5, "name": "Test User 1", "email": "user1@test.com", "created_at": 1794807512429288}
+
+Топик: postgres.public.users
+Операция: INSERT
+Было: null
+Стало: {"id": 6, "name": "Test User 2", "email": "user2@test.com", "created_at": 1794807512430145}
+
+Топик: postgres.public.orders
+Операция: INSERT
+Было: null
+Стало: {"id": 6, "user_id": 1, "product_name": "Notebook", "quantity": 1, "order_date": 1794807512430374}
+
+Топик: postgres.public.orders
+Операция: INSERT
+Было: null
+Стало: {"id": 7, "user_id": 2, "product_name": "Keyboard", "quantity": 2, "order_date": 1794807512431142}
+
+Топик: postgres.public.orders
+Операция: INSERT
+Было: null
+Стало: {"id": 8, "user_id": 3, "product_name": "Mouse", "quantity": 3, "order_date": 1794807512431439}
+
+Топик: postgres.public.users
+Операция: UPDATE
+Было: null
+Стало: {"id": 1, "name": "John Doe", "email": "john.doe@example.com", "created_at": 1794807487497435}
+
+Топик: postgres.public.orders
+Операция: UPDATE
+Было: null
+Стало: {"id": 7, "user_id": 2, "product_name": "Keyboard", "quantity": 10, "order_date": 1794807512431142}
+
+Топик: postgres.public.orders
+Операция: DELETE
+Было: {"id": 8, "user_id": null, "product_name": null, "quantity": null, "order_date": 0}
+Стало: null
+
+Tombstone (пустое сообщение): postgres.public.orders
+
+Consumer остановлен.

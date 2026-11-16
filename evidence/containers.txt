@@ -1,0 +1,7 @@
+NAME            IMAGE                             COMMAND                  SERVICE         CREATED          STATUS                    PORTS
+grafana         grafana/grafana:10.4.2            "/run.sh"                grafana         49 seconds ago   Up 36 seconds             0.0.0.0:3000->3000/tcp, [::]:3000->3000/tcp
+kafka           confluentinc/cp-kafka:7.5.0       "/etc/confluent/dock…"   kafka           49 seconds ago   Up 48 seconds (healthy)   0.0.0.0:9092->9092/tcp, [::]:9092->9092/tcp
+kafka-connect   kafka-connect-jmx:2.6             "/docker-entrypoint.…"   kafka-connect   49 seconds ago   Up 36 seconds             8778/tcp, 0.0.0.0:8083->8083/tcp, [::]:8083->8083/tcp, 0.0.0.0:9404->9404/tcp, [::]:9404->9404/tcp, 9092/tcp
+postgres        postgres:16                       "docker-entrypoint.s…"   postgres        49 seconds ago   Up 48 seconds (healthy)   0.0.0.0:5432->5432/tcp, [::]:5432->5432/tcp
+prometheus      prom/prometheus:v2.51.2           "/bin/prometheus --c…"   prometheus      49 seconds ago   Up 36 seconds             0.0.0.0:9090->9090/tcp, [::]:9090->9090/tcp
+zookeeper       confluentinc/cp-zookeeper:7.5.0   "/etc/confluent/dock…"   zookeeper       49 seconds ago   Up 48 seconds             2181/tcp, 2888/tcp, 3888/tcp
