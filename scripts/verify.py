@@ -103,13 +103,11 @@ from playwright.sync_api import sync_playwright
 with sync_playwright() as pw:
     browser = pw.chromium.launch()
     page = browser.new_page(viewport={'width': 1600, 'height': 1100})
-    page.goto('http://localhost:3000/login')
-    page.locator('input[name="user"]').fill('admin')
-    page.locator('input[name="password"]').fill('admin')
-    page.get_by_role('button', name='Log in', exact=True).click()
-    page.wait_for_url(lambda url: urllib.parse.urlparse(url).path != '/login', timeout=30000)
-    if page.get_by_text('Skip', exact=True).is_visible():
-        page.get_by_text('Skip', exact=True).click()
+    # Use Grafana's session endpoint; avoid a race with the SPA login form.
+    response = page.request.post('http://localhost:3000/login',
+        data={'user': 'admin', 'password': 'admin'})
+    if not response.ok:
+        raise RuntimeError(f'Grafana login failed: {response.status} {response.text()}')
     page.goto('http://localhost:3000/d/kafka-connect-debezium?from=now-15m&to=now&kiosk')
     page.get_by_text('Статус коннектора', exact=True).wait_for(timeout=60000)
     page.get_by_text('RUNNING', exact=True).wait_for(timeout=60000)
